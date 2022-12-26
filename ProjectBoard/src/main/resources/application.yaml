@@ -17,6 +17,10 @@ spring:
     username: jangjh
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:h2:~/test
+#    username: sa
+#    driver-class-name: org.h2.Driver
+
   jpa:
     defer-datasource-initialization: true
     hibernate:
@@ -27,9 +31,9 @@ spring:
       hibernate:
         format_sql: true
         default_batch_fetch_size: 100
-  h2:
-    console:
-      enabled: true # 인 메모리 데이터베이스 h2 (웹 콘솔 활성화)
+#  h2:
+#    console:
+#      enabled: false # 인 메모리 데이터베이스 h2 (웹 콘솔 활성화)
   sql:
     init:
       mode: always # data.sql을 언제 작동시킬것인가?
