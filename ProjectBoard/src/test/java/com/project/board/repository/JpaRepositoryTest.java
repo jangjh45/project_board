@@ -43,7 +43,7 @@ class JpaRepositoryTest {
         // articles가 널이였으면 좋겠고 사이즈는 ?
         assertThat(articles)
                 .isNotNull()
-                .hasSize(100);
+                .hasSize(123);
 
     }
 
