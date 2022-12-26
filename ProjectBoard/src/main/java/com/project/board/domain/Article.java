@@ -3,14 +3,8 @@ package com.project.board.domain;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -23,9 +17,9 @@ import java.util.Set;
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
-@EntityListeners(AuditingEntityListener.class)
 @Entity
-public class Article { // 빨간줄이 나오면 프라이머리키가 없다.
+public class Article extends AuditingFields { // 빨간줄이 나오면 프라이머리키가 없다.
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동으로 번호를 생성
     private Long id;
@@ -42,12 +36,6 @@ public class Article { // 빨간줄이 나오면 프라이머리키가 없다.
     @OrderBy("id") // 정렬기준
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
-
-    // 메타데이터
-    @CreatedDate @Column(nullable = false) private LocalDateTime createdAt; // 생성일시
-    @CreatedBy @Column(nullable = false, length = 100) private String createdBy; // 생성자
-    @LastModifiedDate @Column(nullable = false) private LocalDateTime modifiedAt; // 수정일시
-    @LastModifiedBy @Column(nullable = false, length = 100) private String modifiedBy; // 수정자
 
     protected Article() {} // 코드 밖에서 new 생성 못함
 
